@@ -9,8 +9,7 @@ CurveFlow::CurveFlow(int dimension, int n)
     this->dimension = dimension;
     this->n = n;
     this->h = 1.0/n;
-    this->bd = new double[dimension*(n+2)]();
-    this->g = new double[n+2]();
+    this->d = new double[dimension*(n+2)]();
 }
 
 int CurveFlow::getDegreesOfFreedom()
@@ -46,50 +45,44 @@ void CurveFlow::setInitialCondition(double* u, void (*func)(double*, double))
 
 void CurveFlow::getRightHandSide(const double& t, double* u, double* fu)
 {
-    getBackDifference(u);
-    getLocalLength();
+    getPartialLength(u);
 
-    for(int j = 0; j<dimension; j++)
-    {
-        for(int i = 0; i<n; i++)
-        {
-            fu[dimension*i + j] = (bd[(i+1)*dimension + j]/g[i+1]-bd[i*dimension + j]/g[i])/(g[i]*h);
-        }
-        /**
-        * period boundary condition
-        */
-        fu[n*dimension + j] = fu[j];
-        fu[(n+1)*dimension + j] = fu[dimension + j];
-    }
-}
-
-void CurveFlow::getBackDifference(const double* u)
-{
     for(int j = 0; j<dimension; j++)
     {
         for(int i = 1; i<n+1; i++)
         {
-            bd[i*dimension + j] = (u[dimension*i+j] - u[dimension*(i-1)+j])/h;
+            fu[dimension*i + j] = 2.0 / (d[i]+d[i+1]) * 
+                            ((u[(i+1)*dimension+j] - u[i*dimension+j])/d[i+1] -
+                            (u[i*dimension+j] - u[(i-1)*dimension+j])/d[i]);
+
         }
-        bd[j] = bd[n*dimension + j];
-        bd[(n+1)*dimension + j] = bd[dimension + j];
+        /**
+        * period boundary condition
+        */
+        fu[j] = fu[n*dimension + j];
+        fu[(n+1)*dimension + j] = fu[dimension + j];
     }
 }
 
-void CurveFlow::getLocalLength()
+void CurveFlow::getPartialLength(const double* u)
 {
     for(int i = 1; i<n+1; i++)
     {
-        g[i] = 0;
+        d[i] = 0;
         for(int j = 0; j<dimension; j++)
         {
-            g[i] += bd[i*dimension + j] * bd[i*dimension + j];
+            d[i] += (u[i*dimension + j] - u[(i-1)*dimension+j])*
+                    (u[i*dimension + j] - u[(i-1)*dimension+j]);
         }
-        g[i] = sqrt(g[i]);
+        d[i] = std::sqrt(d[i]);
     }
 
-    g[0] = g[n];
-    g[n+1] = g[1];
+    /**
+    * boundary condition
+    */
+    d[0] = d[n];
+    d[n+1] = d[1];
+
 }
 
 bool CurveFlow::writeSolution(const double &t, int step, const double *u)
@@ -119,6 +112,5 @@ bool CurveFlow::writeSolution(const double &t, int step, const double *u)
 
 CurveFlow::~CurveFlow()
 {
-    if(this->bd) delete[] bd;
-    if(this->g) delete[] g;
+    if(this->d) delete[] d;
 }

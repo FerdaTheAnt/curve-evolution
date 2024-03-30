@@ -4,7 +4,7 @@ project(Curves)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS True)
 
-#add_compile_options(-g)
+add_compile_options(-O3)
 
 set(SRC 
         src/Merson.cpp 
@@ -12,7 +12,6 @@ set(SRC
         src/CurveFlow.cpp 
         src/CurveFlowForce.cpp
         src/DeTurck.cpp 
-        src/AreaPreserving.cpp 
         src/functions.cpp 
         src/RedistributionInSpace.cpp 
         src/RedisForce.cpp)

@@ -15,8 +15,6 @@ class CurveFlow : public ODEProblem
         int dimension;
         int n;
         double h;
-        double* bd;
-        double* g;
-        void getBackDifference(const double* u);
-        void getLocalLength();
+        double* d;
+        void getPartialLength(const double* u);
 };
