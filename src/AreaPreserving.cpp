@@ -12,24 +12,25 @@ AreaPreserving::AreaPreserving(int dimension, int n)
 void AreaPreserving::getRightHandSide(const double& t, double* u, double* fu)
 {
     double norm(0);
-    getBackDifference(u);
-    getLocalLength();
+    getPartialLength(u);
+    //getBackDifference(u);
+    //getLocalLength();
 
     getAreaForce();
-    for(int i = 0; i<n; i++)
+    for(int i = 1; i<n+1; i++)
     {
         for(int j = 0; j<dimension; j++)
         {
-            norm = 0.5*(g[i]*g[i] + g[i+1]*g[i+1]);
-            fu[dimension*i + j] = (bd[(i+1)*dimension + j]-bd[i*dimension + j])/(norm*h);
+            norm = 2.0/(d[i]*d[i] + d[i+1]*d[i+1]);
+            fu[dimension*i + j] = norm*(u[(i+1)*dimension + j]-2.0*u[i*dimension + j]+u[(i-1)*dimension+j]);
         }
         /**
         * norm now means normal vector
         */
-        norm = bd[i*dimension+1]/g[i];
+        norm = (u[i*dimension+1]-u[(i-1)*dimension+1])/d[i];
         fu[dimension*i] += force*norm;
 
-        norm = -bd[i*dimension]/g[i];
+        norm = -(u[i*dimension]-u[(i-1)*dimension])/d[i];
         fu[dimension*i+1] += force*norm;
     }
 
@@ -38,7 +39,7 @@ void AreaPreserving::getRightHandSide(const double& t, double* u, double* fu)
     */
     for(int j = 0; j<dimension; j++)
     {
-        fu[n*dimension + j] = fu[j];
+        fu[j] = fu[n*dimension+j];
         fu[(n+1)*dimension + j] = fu[dimension + j];
     }
 }
@@ -52,8 +53,8 @@ void AreaPreserving::getAreaForce()
 double AreaPreserving::getLength()
 {
     double length = 0;
-    for(int i = 0; i<n; i++){
-        length += h*g[i];
+    for(int i = 1; i<n+1; i++){
+        length += d[i];
     }
     return length;
 }

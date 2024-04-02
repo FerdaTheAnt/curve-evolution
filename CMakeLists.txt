@@ -14,7 +14,9 @@ set(SRC
         src/DeTurck.cpp 
         src/functions.cpp 
         src/RedistributionInSpace.cpp 
-        src/RedisForce.cpp)
+        src/RedisForce.cpp
+        src/AreaPreserving.cpp
+)
 
 add_executable(curves ${SRC} src/curve.cpp)
 
