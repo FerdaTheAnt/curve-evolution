@@ -21,7 +21,7 @@ bool solve(
     const int timeStepsCount = std::ceil(std::max( 0.0, finalTime - initialTime ) / timeStep);
     double time(initialTime);
     problem->writeSolution(time, 0, u);
-    for(int k = 1; k<timeStepsCount; k++)
+    for(int k = 1; k<timeStepsCount+1; k++)
     {
         std::cout << "Solving time step " << k << " / " << timeStepsCount << " => " <<
         (double) k / (double) timeStepsCount * 100.0 << "% " << std::endl;

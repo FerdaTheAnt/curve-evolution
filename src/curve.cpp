@@ -14,7 +14,7 @@
 const int dim = 2;
 const int n = 800;
 const double initialTime = 0.0;
-const double finalTime = 0.6;
+const double finalTime = 0.3;
 const double timeStep = 0.01;
 const double integrationTimeStep = 0.45/(n*n);
 
@@ -23,9 +23,9 @@ int main(int argc, char **argv)
     auto start = std::chrono::steady_clock::now();
 
     CurveFlow fdm(dim, n);
-    Euler solver;
-    //Merson solver;
-    //solver.setAdaptivity(10e-6);
+    //Euler solver;
+    Merson solver;
+    solver.setAdaptivity(10e-6);
     double *u = new double[(n+2)*dim]();
 
     fdm.setInitialCondition(u, circle);
