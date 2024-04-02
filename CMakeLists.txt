@@ -12,6 +12,7 @@ set(SRC
         src/CurveFlow.cpp 
         src/CurveFlowForce.cpp
         src/DeTurck.cpp 
+        src/DeTurckForce.cpp
         src/functions.cpp 
         src/RedistributionInSpace.cpp 
         src/RedisForce.cpp

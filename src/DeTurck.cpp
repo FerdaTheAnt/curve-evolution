@@ -12,8 +12,8 @@ void DeTurck::getRightHandSide(const double& t, double* u, double* fu)
     {
         for(int i = 1; i<n+1; i++)
         {
-            norm = 2.0*(d[i]*d[i] + d[i+1]*d[i+1]);
-            fu[dimension*i + j] = (u[(i+1)*dimension+j] + 2*u[i*dimension+j] + 2*u[(i-1)*dimension+j])/norm;
+            norm = 2.0/(d[i]*d[i] + d[i+1]*d[i+1]);
+            fu[dimension*i + j] = norm*(u[(i+1)*dimension+j] - 2*u[i*dimension+j] + u[(i-1)*dimension+j]);
         }
         /**
         * period boundary condition

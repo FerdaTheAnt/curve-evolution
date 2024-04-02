@@ -3,6 +3,7 @@
 #include "CurveFlow.h"
 #include "CurveFlowForce.h"
 #include "DeTurck.h"
+#include "DeTurckForce.h"
 #include "AreaPreserving.h"
 #include "RedistributionInSpace.h"
 #include "RedisForce.h"
@@ -22,7 +23,7 @@ int main(int argc, char **argv)
 {
     auto start = std::chrono::steady_clock::now();
 
-    CurveFlowForce fdm(dim, n);
+    DeTurckForce fdm(dim, n);
     Euler solver;
     //Merson solver;
     //solver.setAdaptivity(10e-6);
