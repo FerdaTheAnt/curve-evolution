@@ -22,10 +22,10 @@ int main(int argc, char **argv)
 {
     auto start = std::chrono::steady_clock::now();
 
-    AreaPreserving fdm(dim, n);
-    //Euler solver;
-    Merson solver;
-    solver.setAdaptivity(10e-6);
+    CurveFlowForce fdm(dim, n);
+    Euler solver;
+    //Merson solver;
+    //solver.setAdaptivity(10e-6);
     double *u = new double[(n+2)*dim]();
 
     fdm.setInitialCondition(u, fold);
