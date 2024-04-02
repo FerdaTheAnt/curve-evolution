@@ -38,6 +38,12 @@ void spherical(double *x, double p_u)
     x[2] = r * 4* cos(5*2*PI*p_u);
 }
 
+void wavy_circle(double *x, double p_u)
+{
+    x[0] = cos(2*PI*p_u);
+    x[1] = sin(2*PI*p_u);
+    x[2] = cos(12*PI*p_u);
+}
 
 void inclined_circle(double *x, double p_u)
 {

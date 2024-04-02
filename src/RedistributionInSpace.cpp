@@ -9,7 +9,6 @@ RedistributionSpace::RedistributionSpace(int dimension, int n)
 {
     length = 0.0;
     omega = 0.0;
-    d = new double[n+2]();
     k = new double[n+2]();
     alpha = new double[n+2]();
 }
@@ -40,33 +39,6 @@ void RedistributionSpace::getRightHandSide(const double& t, double* u, double* f
         fu[j] = fu[n*dimension + j];
         fu[(n+1)*dimension + j] = fu[dimension + j];
     }
-}
-
-void RedistributionSpace::getPartialLength(const double* u)
-{
-    for(int i = 1; i < n+1; i++)
-    {
-        d[i] = 0;
-        for(int j = 0; j<dimension; j++)
-        {
-            d[i] += (u[i*dimension + j]-u[(i-1)*dimension+j])*
-                (u[i*dimension + j]-u[(i-1)*dimension+j]);
-        }
-        d[i] = std::sqrt(d[i]);
-    }
-
-    /**
-    * boundary condition
-    */
-    d[0] = d[n];
-    d[n+1] = d[1];
-}
-
-void RedistributionSpace::getLength()
-{
-    length = 0;
-    for(int i = 1; i < n+1; i++)
-        length += d[i];
 }
 
 void RedistributionSpace::getCurvature(const double* u)
@@ -179,7 +151,6 @@ void RedistributionSpace::getAlpha()
 
 RedistributionSpace::~RedistributionSpace()
 {
-    if(d != nullptr) delete d;
     if(k != nullptr) delete k;
     if(alpha != nullptr) delete alpha;
 }

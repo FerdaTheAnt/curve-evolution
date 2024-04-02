@@ -16,5 +16,7 @@ class CurveFlow : public ODEProblem
         int n;
         double h;
         double* d;
+        double length;
         void getPartialLength(const double* u);
+        void getLength();
 };

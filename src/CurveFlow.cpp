@@ -10,6 +10,7 @@ CurveFlow::CurveFlow(int dimension, int n)
     this->n = n;
     this->h = 1.0/n;
     this->d = new double[dimension*(n+2)]();
+    this->length = 0;
 }
 
 int CurveFlow::getDegreesOfFreedom()
@@ -83,6 +84,13 @@ void CurveFlow::getPartialLength(const double* u)
     d[0] = d[n];
     d[n+1] = d[1];
 
+}
+
+void CurveFlow::getLength()
+{
+    length = 0;
+    for(int i = 1; i < n+1; i++)
+        length += d[i];
 }
 
 bool CurveFlow::writeSolution(const double &t, int step, const double *u)

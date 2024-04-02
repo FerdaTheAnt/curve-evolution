@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 {
     auto start = std::chrono::steady_clock::now();
 
-    DeTurckForce fdm(dim, n);
+    RedistributionSpace fdm(dim, n);
     Euler solver;
     //Merson solver;
     //solver.setAdaptivity(10e-6);

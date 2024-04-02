@@ -50,7 +50,7 @@ void DeTurckForce::getForce()
 {
     for(int i = 1; i<n+1; i++)
     {
-        F[i] = -10.0;
+        F[i] = 0.5;
     }
 
     /*

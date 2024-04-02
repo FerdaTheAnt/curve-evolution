@@ -41,8 +41,8 @@ void RedisForce::getRightHandSide(const double& t, double* u, double* fu)
 
         for(int j = 0; j<dimension; j++)
         {
-            fu[dimension*i + j] = alpha[i]*(u[i*dimension+j] - u[(i-1)*dimension+j])/d[i];
-            fu[dimension*i + j] += 2.0/(d[i+1]+d[i])*N[j];
+            fu[dimension*i + j] = alpha[i]*(u[(i+1)*dimension+j] - u[(i-1)*dimension+j])/(d[i+1]+d[i]);
+            fu[dimension*i + j] += 2.0/(d[i]+d[i+1])*N[j];
             fu[dimension*i + j] += f[i]*(1.0/normN)*N[j];
         }
     }
@@ -115,7 +115,7 @@ void RedisForce::getForce(const double* u)
 {
     for(int i = 1; i < n+1; i++)
     {
-        f[i] = 2.0; //shape of force function in here
+        f[i] = 0.5; //shape of force function in here
     }
     f[0] = f[n];
     f[n+1] = f[1];
@@ -134,6 +134,9 @@ void RedisForce::getOmega()
 
 void RedisForce::getSeries()
 {
+    /*
+    * Careful choice of derivative norm aproximation is necessary
+    */
     double averageElastic (0.0);
     for(int i = 1; i<n+1; i++)
     {
@@ -143,7 +146,6 @@ void RedisForce::getSeries()
     for(int i = 1; i < n+1; i++)
     {
         alpha[i] = (k[i]+f[i])*k[i]*d[i] - averageElastic*d[i] + omega*(length/n - d[i]);
-        //alpha[i] *= 0.5*(d[i+1]+d[i]);
     }
 
     /* 

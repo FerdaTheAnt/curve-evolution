@@ -50,7 +50,7 @@ void CurveFlowForce::getForce()
 {
     for(int i = 1; i<n+1; i++)
     {
-        F[i] = -3.0;
+        F[i] = -10.0;
     }
 
     /*
