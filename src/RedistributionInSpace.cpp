@@ -28,7 +28,7 @@ void RedistributionSpace::getRightHandSide(const double& t, double* u, double* f
     {
         for(int i = 1; i<n+1; i++)
         {
-            fu[dimension*i + j] = alpha[i]*(u[i*dimension+j] - u[(i-1)*dimension+j])/d[i];
+            fu[dimension*i + j] = alpha[i]*(u[(i+1)*dimension+j] - u[(i-1)*dimension+j])/(d[i+1] + d[i]);
             fu[dimension*i + j] += 2.0/(d[i+1]+d[i])*
                                     ((u[(i+1)*dimension + j] - u[i*dimension + j])/d[i+1] -
                                      (u[i*dimension + j] - u[(i-1)*dimension + j])/d[i]);
