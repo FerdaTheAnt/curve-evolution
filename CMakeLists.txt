@@ -17,6 +17,7 @@ set(SRC
         src/RedistributionInSpace.cpp 
         src/RedisForce.cpp
         src/AreaPreserving.cpp
+        src/LengthPreserving.cpp
 )
 
 add_executable(curves ${SRC} src/curve.cpp)
