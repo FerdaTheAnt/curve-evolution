@@ -7,7 +7,7 @@ class RedistributionSpace : public CurveFlow
 public:
     RedistributionSpace(int dimension, int n);
     ~RedistributionSpace();
-    void getRightHandSide(const double& t, double* u, double* fu) override;
+    virtual void getRightHandSide(const double& t, double* u, double* fu) override;
 protected:
     void getCurvature(const double* u);
     void getOmega();
@@ -15,7 +15,7 @@ protected:
     void getSum();
     void getAlpha();
 private:
-    int STEPS = 1;
+    //int STEPS = 1;
     double omega;
     double* alpha;
     double* k;

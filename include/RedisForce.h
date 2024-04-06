@@ -24,5 +24,5 @@ private:
     double* d;
     double* k;
 
-    double* f;
+    double* F;
 };

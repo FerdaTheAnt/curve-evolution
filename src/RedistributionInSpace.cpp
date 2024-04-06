@@ -2,7 +2,6 @@
 #include "CurveFlow.h"
 
 #include <cmath>
-#include <iostream>
 
 RedistributionSpace::RedistributionSpace(int dimension, int n)
 :CurveFlow(dimension, n)
@@ -76,9 +75,10 @@ void RedistributionSpace::getOmega()
     }
     omega *= (kappa2/length);
 
-    if(STEPS < 6)
-        std::cout<< "omega is " << omega << "\n";
-    STEPS++;
+    //TODO: consider removing this, it was used only for debugging
+    //if(STEPS < 6)
+    //    std::cout<< "omega is " << omega << "\n";
+    //STEPS++;
 }
 
 void RedistributionSpace::getSeries()
@@ -101,9 +101,10 @@ void RedistributionSpace::getSeries()
     alpha[0] = alpha[n];
     alpha[n+1] = alpha[1];
 
-    if(STEPS < 6)
-        std::cout<< "a series is " << alpha[0] << " and " << alpha[2] << "\n";
-    STEPS++;
+    //TODO: consider removing this, it was used only for debugging
+    //if(STEPS < 6)
+    //    std::cout<< "a series is " << alpha[0] << " and " << alpha[2] << "\n";
+    //STEPS++;
 }
 
 void RedistributionSpace::getSum()
@@ -117,9 +118,10 @@ void RedistributionSpace::getSum()
         alpha[i] = sum;
     }
 
-    if(STEPS < 6)
-        std::cout<< "sum series is " << alpha[0] << " and " << alpha[2] << "\n";
-    STEPS++;
+    //TODO: consider removing this, it was used only for debugging
+    //if(STEPS < 6)
+    //    std::cout<< "sum series is " << alpha[0] << " and " << alpha[2] << "\n";
+    //STEPS++;
 }
 
 void RedistributionSpace::getAlpha()

@@ -12,7 +12,7 @@ RedisForce::RedisForce(int dimension, int n)
     d = new double[n+2]();
     k = new double[n+2]();
 
-    f = new double[n+2]();    
+    F = new double[n+2]();    
 }
 
 void RedisForce::getRightHandSide(const double& t, double* u, double* fu)
@@ -43,7 +43,7 @@ void RedisForce::getRightHandSide(const double& t, double* u, double* fu)
         {
             fu[dimension*i + j] = alpha[i]*(u[(i+1)*dimension+j] - u[(i-1)*dimension+j])/(d[i+1]+d[i]);
             fu[dimension*i + j] += 2.0/(d[i]+d[i+1])*N[j];
-            fu[dimension*i + j] += f[i]*(1.0/normN)*N[j];
+            fu[dimension*i + j] += F[i]*(1.0/normN)*N[j];
         }
     }
 
@@ -115,10 +115,10 @@ void RedisForce::getForce(const double* u)
 {
     for(int i = 1; i < n+1; i++)
     {
-        f[i] = 0.5; //shape of force function in here
+        F[i] = 0.0; //shape of force function in here
     }
-    f[0] = f[n];
-    f[n+1] = f[1];
+    F[0] = F[n];
+    F[n+1] = F[1];
 }
 
 void RedisForce::getOmega()
@@ -127,7 +127,7 @@ void RedisForce::getOmega()
     omega = 0.0;
     for(int i = 1; i < n+1; i++)
     {
-        omega += (k[i] + f[i])*k[i]*d[i];
+        omega += (k[i] + F[i])*k[i]*d[i];
     }
     omega *= (kappa2/length);
 }
@@ -140,12 +140,12 @@ void RedisForce::getSeries()
     double averageElastic (0.0);
     for(int i = 1; i<n+1; i++)
     {
-        averageElastic += (k[i] + f[i])*k[i]*d[i];
+        averageElastic += (k[i] + F[i])*k[i]*d[i];
     }
     averageElastic *= (1.0/length);
     for(int i = 1; i < n+1; i++)
     {
-        alpha[i] = (k[i]+f[i])*k[i]*d[i] - averageElastic*d[i] + omega*(length/n - d[i]);
+        alpha[i] = (k[i]+F[i])*k[i]*d[i] - averageElastic*d[i] + omega*(length/n - d[i]);
     }
 
     /* 
@@ -199,5 +199,5 @@ RedisForce::~RedisForce()
     if(d != nullptr) delete d;
     if(k != nullptr) delete k;
     if(alpha != nullptr) delete alpha;
-    if(f != nullptr) delete f;
+    if(F != nullptr) delete F;
 }
