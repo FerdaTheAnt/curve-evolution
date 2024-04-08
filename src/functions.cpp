@@ -70,3 +70,20 @@ void torus_helix(double *x, double p_u)
     x[1] = (1 + 0.3*cos(2*PI*10*p_u))*sin(2*PI*p_u);
     x[2] = 0.3*sin(2*PI*10*p_u);
 }
+
+void spherical2(double *x, double p_u)
+{
+    double ni = 2.0*sin(2*2*PI*p_u) - 1.99*pow(sin(2*2*PI*p_u), 3);
+    x[0] = cos(ni)*cos(2*PI*p_u);
+    x[1] = sin(ni)*cos(2*PI*p_u);
+    x[2] = sin(2*PI*p_u);
+}
+
+void cyllindrical(double *x, double p_u)
+{
+    p_u = 2*PI*p_u;
+    double r = 1 + 0.1*sin(p_u);
+    x[0] = r*cos(4*p_u);
+    x[1] = r*cos(p_u);
+    x[2] = cos(p_u) - sin(2*p_u);
+}

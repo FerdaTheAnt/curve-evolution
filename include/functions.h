@@ -15,3 +15,5 @@ void wavy_circle(double *x, double p_u);
 void inclined_circle(double *x, double p_u);
 void example(double *x, double p_u);
 void torus_helix(double *x, double p_u);
+void spherical2(double *x, double p_u);
+void cyllindrical(double *x, double p_u);
