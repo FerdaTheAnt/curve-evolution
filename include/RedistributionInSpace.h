@@ -15,7 +15,6 @@ protected:
     void getSum();
     void getAlpha();
 private:
-    //int STEPS = 1;
     double omega;
     double* alpha;
     double* k;

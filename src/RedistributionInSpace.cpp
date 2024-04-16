@@ -74,11 +74,6 @@ void RedistributionSpace::getOmega()
         omega += k[i]*k[i]*d[i];
     }
     omega *= (kappa2/length);
-
-    //TODO: consider removing this, it was used only for debugging
-    //if(STEPS < 6)
-    //    std::cout<< "omega is " << omega << "\n";
-    //STEPS++;
 }
 
 void RedistributionSpace::getSeries()
@@ -100,11 +95,6 @@ void RedistributionSpace::getSeries()
     */
     alpha[0] = alpha[n];
     alpha[n+1] = alpha[1];
-
-    //TODO: consider removing this, it was used only for debugging
-    //if(STEPS < 6)
-    //    std::cout<< "a series is " << alpha[0] << " and " << alpha[2] << "\n";
-    //STEPS++;
 }
 
 void RedistributionSpace::getSum()
@@ -117,11 +107,6 @@ void RedistributionSpace::getSum()
         //lastAlph = alpha[i];
         alpha[i] = sum;
     }
-
-    //TODO: consider removing this, it was used only for debugging
-    //if(STEPS < 6)
-    //    std::cout<< "sum series is " << alpha[0] << " and " << alpha[2] << "\n";
-    //STEPS++;
 }
 
 void RedistributionSpace::getAlpha()
