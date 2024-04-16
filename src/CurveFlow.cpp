@@ -97,7 +97,10 @@ bool CurveFlow::writeSolution(const double &t, int step, const double *u)
 {
     std::fstream file;
     if(step == 0)
+    {
         file.open("curve.dat", std::ios::out | std::ios::trunc);
+        file << "# N = " << n << "\n";
+    }
     else
         file.open("curve.dat", std::ios::out | std::ios::app);
     if(!file)
