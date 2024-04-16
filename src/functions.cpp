@@ -49,7 +49,7 @@ void inclined_circle(double *x, double p_u)
 {
     x[0] = 0.5*sqrt(2)*cos(2*PI*p_u);
     x[1] = sin(2*PI*p_u);
-    x[2] = 0.5*sqrt(2)*cos(2*PI*p_u);
+    x[2] = x[0];
 }
 
 double phi(double p_u)
@@ -79,6 +79,7 @@ void spherical2(double *x, double p_u)
     x[2] = sin(2*PI*p_u);
 }
 
+// Basically a lissajous curve with waves along z-axis
 void cyllindrical(double *x, double p_u)
 {
     p_u = 2*PI*p_u;
@@ -86,4 +87,39 @@ void cyllindrical(double *x, double p_u)
     x[0] = r*cos(4*p_u);
     x[1] = r*cos(p_u);
     x[2] = cos(p_u) - sin(2*p_u);
+}
+
+void cyllindrical2(double *x, double p_u)
+{
+    p_u = 2*PI*p_u;
+    double r = 1 + 0.1*sin(p_u);
+    x[0] = r*cos(5*p_u);
+    x[1] = r*cos(4*p_u);
+    x[2] = cos(p_u) - sin(2*p_u);
+}
+
+void dumbbell3d(double *x, double p_u)
+{
+    p_u = 2*PI*p_u;
+    x[1] = cos(p_u);
+    x[2] = 2.0*sin(p_u) - 1.99*pow(sin(p_u), 3);
+    x[0] = sin(3.0*x[1]);
+}
+
+void inclinedFold(double *x, double p_u)
+{
+    p_u = 2*PI*p_u;
+    double r = 1 + 0.6*cos(7*p_u);
+    x[0] = r*cos(p_u);
+    x[1] = r*sin(p_u);
+    x[2] = x[0];
+}
+
+void stepFold(double *x, double p_u)
+{
+    p_u = 2*PI*p_u;
+    double r = 1 + 0.6*cos(7*p_u);
+    x[0] = r*cos(p_u);
+    x[1] = r*sin(p_u);
+    x[2] = cos(p_u);
 }
