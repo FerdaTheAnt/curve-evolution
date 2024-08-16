@@ -115,7 +115,7 @@ void RedisForce::getForce(const double* u)
 {
     for(int i = 1; i < n+1; i++)
     {
-        F[i] = 0.0; //shape of force function in here
+        F[i] = -5.0; //shape of force function in here
     }
     F[0] = F[n];
     F[n+1] = F[1];

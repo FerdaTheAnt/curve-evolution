@@ -5,6 +5,7 @@
 */
 void fold(double* x, double p_u);
 void circle(double* x, double p_u);
+void ellipse(double *x, double p_u);
 void lissajous(double *x, double p_u);
 
 /**

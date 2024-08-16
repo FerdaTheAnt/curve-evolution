@@ -21,6 +21,15 @@ void circle(double *x, double p_u)
 }
 
 
+void ellipse(double *x, double p_u)
+{
+    double a = 1.4;
+    double b = 0.8;
+    x[0] = a*cos(2*PI*p_u);
+    x[1] = b*sin(2*PI*p_u);
+}
+
+
 void lissajous(double *x, double p_u)
 {
     x[0] = sin(5*2*PI*p_u + PI/2);
